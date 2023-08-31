@@ -168,14 +168,23 @@ def review(request):
     # print(books)
     # print(teacherID)
     # context = {}
-    # return render(request, 'base/form.html',context)po
+    # return render(request, 'base/form.html',context)
     if request.method == "POST":
+        books = object.get("book")
         books = request.POST.get("book")
         teacherID = request.POST.get("teacherID")
         print(books)
         print(teacherID)
     context = {}
+    point = point(
+        point = books,
+        teacherID = teacherID,
+        review = review,
+    )
+    point.save()
+
     return render(request, 'base/form.html', context)
+
 
 """def review(request):
     if request.mothod == 'POST':

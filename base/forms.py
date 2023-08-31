@@ -4,6 +4,7 @@ from django import forms
 from .models import Question,Review
 from .models import Question, Matching
 from .models import UserInfo
+from .models import Review
 
 class QuestionForm(ModelForm):
     class Meta:
@@ -47,4 +48,11 @@ class UserInfoForm(forms.ModelForm):
         fields = ['profile_picture','name','age','job','phone_number','email','about_me','meeting_app']
         labels = {'age':"年齢"}
 
+class Point(forms.ModelForm):
+    teacheID = forms.IntegerField(label="teacheID")
+    Point = forms.IntegerField(label="point")
+    Review = forms.CharField(label="レビュー")
+    class Meta:
+        model = Review
+        fields = ['teacheID','Point','Review']
 

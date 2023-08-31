@@ -38,7 +38,7 @@
     <center>
     <form method="POST" action="">
         <input type="hidden" name="csrfmiddlewaretoken" value="RR7srhDEZD6rvArsxNTV8hY2M2IguA8AeVQrbu0VRNtvZOgmE7btLcJVEcDHoGUp">
-        <p>
+      <!--  <p>
     <label for="id_topic">Topic:</label>
     <select name="topic" required="" id="id_topic">
   <option value="" selected="">---------</option>
@@ -57,7 +57,7 @@
 
   <option value="8">IT</option>
 
-</select>
+</select>-->
     
     
   </p>
@@ -65,7 +65,7 @@
   
     {% csrf_token %}
     {{form.as_p}}
-    <!--<label for="id_subtopic">Subtopic:</label>
+    <label for="id_subtopic">Subtopic:</label>
     <select name="subtopic" required="" id="id_subtopic">
   <option value="" selected="">---------</option>
 
@@ -75,30 +75,22 @@
 
   <option value="3">python</option>
 
-  <option value="4">数学</option>
+  <option value="4">R言語</option>
 
-  <option value="5">物理</option>
+  <option value="5">java</option>
 
-  <option value="6">化学</option>
+  <option value="6">C#</option>
 
-  <option value="7">社会</option>
+  <option value="7">RUdy</option>
 
-  <option value="8">国語</option>
+  <option value="8">C++</option>
 
-  <option value="9">英語</option>
-
-  <option value="10">韓国語</option>
-
-  <option value="11">AWS</option>
-
-  <option value="12">Webデザイン</option>
+  <option value="9">HTML</option>
 
 </select>
--->
 
 <h3>曜日選択</h3>
 <div class="day">
-  <h3>レビュー</h3>
   <div class="stars">
     <input id="weekday-mon" type="checkbox" name="book" value="1"><label for="weekday-mon">月曜日</label>
     <input id="weekday-tue" type="checkbox" name="book" value="2"><label for="weekday-tue">火曜日</label>

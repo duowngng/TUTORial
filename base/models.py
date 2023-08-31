@@ -140,3 +140,8 @@ class UserInfo(models.Model):
     email = models.EmailField()
     about_me = models.TextField()
     meeting_app = models.CharField(max_length=100)
+
+
+class Point(models.Model):
+    teacher_id = models.IntegerField(primary_key=True)
+    amount = models.IntegerField()
