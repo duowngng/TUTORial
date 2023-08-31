@@ -181,12 +181,20 @@ class MatchingListView(ListView):
 
 
 def review(request):
-    books = request.POST.get("book")
-    teacherID = request.POST.get("teacherID")
-    print(books)
-    print(teacherID)
+    # books = request.POST.get("book")
+    # teacherID = request.POST.get("teacherID")
+    # object.get("book")
+    # print(books)
+    # print(teacherID)
+    # context = {}
+    # return render(request, 'base/form.html',context)po
+    if request.method == "POST":
+        books = request.POST.get("book")
+        teacherID = request.POST.get("teacherID")
+        print(books)
+        print(teacherID)
     context = {}
-    return render(request, 'base/form.html',context)
+    return render(request, 'base/form.html', context)
 
 """def review(request):
     if request.mothod == 'POST':
@@ -257,3 +265,5 @@ class MatchingResultView(TemplateView):
         matchings = matching_filter.qs
         context['matchings'] = matchings
         return context
+    
+
