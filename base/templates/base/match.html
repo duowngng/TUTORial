@@ -63,8 +63,9 @@
   </p>
 
   
-  <p>
-    <label for="id_subtopic">Subtopic:</label>
+    {% csrf_token %}
+    {{form.as_p}}
+    <!--<label for="id_subtopic">Subtopic:</label>
     <select name="subtopic" required="" id="id_subtopic">
   <option value="" selected="">---------</option>
 
@@ -93,19 +94,80 @@
   <option value="12">Webデザイン</option>
 
 </select>
-    
-    
-  </p>
-  <h3>曜日選択</h3>
+-->
+
+<h3>曜日選択</h3>
+<div class="day">
+  <h3>レビュー</h3>
   <div class="stars">
-    <input id="review01" type="radio" name="book" value="monday"><label for="monday">月曜日</label>
-    <input id="review02" type="radio" name="book" value="tuesday"><label for="tuesday">火曜日</label>
-    <input id="review03" type="radio" name="book" value="wednesday"><label for="wednesday">水曜日</label>
-    <input id="review04" type="radio" name="book" value="thursday"><label for="thursday">木曜日</label>
-    <input id="review05" type="radio" name="book" value="friday"><label for="friday">金曜日</label>
-    <input id="review06" type="radio" name="book" value="saturday"><label for="saturday">土曜日</label>
-    <input id="review07" type="radio" name="book" value="sunday"><label for="sunday">日曜日</label>
+    <input id="weekday-mon" type="checkbox" name="book" value="1"><label for="weekday-mon">月曜日</label>
+    <input id="weekday-tue" type="checkbox" name="book" value="2"><label for="weekday-tue">火曜日</label>
+    <input id="weekday-wed" type="checkbox" name="book" value="3"><label for="weekday-wed">水曜日</label>
+    <input id="weekday-thu" type="checkbox" name="book" value="4"><label for="weekday-thu">木曜日</label>
+    <input id="weekday-fri" type="checkbox" name="book" value="5"><label for="weekday-fri">金曜日</label>
+    <input id="weekday-sat" type="checkbox" name="book" value="6"><label for="weekday-sat">土曜日</label>
+    <input id="weekday-sun" type="checkbox" name="book" value="7"><label for="weekday-sun">日曜日</label>
   </div>
+</div>
+    
+  <!-- <h3>曜日選択</h3>
+  <div class="weekDays-selector">
+    {% if '1' in matching.time %}
+    <input type="checkbox" onclick="return false;" id="weekday-mon" class="weekday" checked />
+    <label for="weekday-mon">M</label>
+    {% else %}
+    <input type="checkbox" onclick="return false;" id="weekday-mon" class="weekday" />
+    <label for="weekday-mon">M</label>
+    {% endif %}
+
+    {% if '2' in matching.time %}
+    <input type="checkbox" onclick="return false;" id="weekday-tue" class="weekday" checked />
+    <label for="weekday-tue">T</label>
+    {% else %}
+    <input type="checkbox" onclick="return false;" id="weekday-tue" class="weekday" />
+    <label for="weekday-tue">T</label>
+    {% endif %}
+
+    {% if '3' in matching.time %}
+    <input type="checkbox" onclick="return false;" id="weekday-wed" class="weekday" checked />
+    <label for="weekday-wed">W</label>
+    {% else %}
+    <input type="checkbox" onclick="return false;" id="weekday-wed" class="weekday" />
+    <label for="weekday-wed">W</label>
+    {% endif %}
+
+    {% if '4' in matching.time %}
+    <input type="checkbox" onclick="return false;" id="weekday-thu" class="weekday" checked />
+    <label for="weekday-thu">T</label>
+    {% else %}
+    <input type="checkbox" onclick="return false;" id="weekday-thu" class="weekday" />
+    <label for="weekday-thu">T</label>
+    {% endif %}
+
+    {% if '5' in matching.time %}
+    <input type="checkbox" onclick="return false;" id="weekday-fri" class="weekday" checked />
+    <label for="weekday-fri">F</label>
+    {% else %}
+    <input type="checkbox" onclick="return false;" id="weekday-fri" class="weekday" />
+    <label for="weekday-fri">F</label>
+    {% endif %}
+
+    {% if '6' in matching.time %}
+    <input type="checkbox" onclick="return false;" id="weekday-sat" class="weekday" checked />
+    <label for="weekday-sat">S</label>
+    {% else %}
+    <input type="checkbox" onclick="return false;" id="weekday-sat" class="weekday" />
+    <label for="weekday-sat">S</label>
+    {% endif %}
+
+    {% if '7' in matching.time %}
+    <input type="checkbox" onclick="return false;" id="weekday-sun" class="weekday" checked />
+    <label for="weekday-sun">S</label>
+    {% else %}
+    <input type="checkbox" onclick="return false;" id="weekday-sun" class="weekday" />
+    <label for="weekday-sun">S</label>
+    {% endif %}
+</div> -->
 
   <label>時間を選択:</label>
   <select id="timeSelect" multiple>
@@ -119,23 +181,68 @@
 
 </center>
 
-<script>
-    const dayCheckboxes = document.querySelectorAll('input[name="day"]');
-    const timeSelect = document.getElementById('timeSelect');
-
-    dayCheckboxes.forEach(checkbox => {
-        checkbox.addEventListener('change', function () {
-            // 選択された曜日に応じて時間の選択を制御
-            const selectedDays = Array.from(dayCheckboxes).filter(cb => cb.checked);
-            if (selectedDays.length > 0) {
-                timeSelect.disabled = false;
-            } else {
-                timeSelect.disabled = true;
-                timeSelect.selectedIndex = -1; // 選択を解除
-            }
-        });
+<!-- <script>
+  // チェックボックスの状態に応じて時間選択を制御する関数
+  function updateSelectOptions() {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    const select = document.getElementById('timeSelect');
+  
+    // 選択された曜日の値を格納する配列
+    const selectedDays = [];
+  
+    checkboxes.forEach(checkbox => {
+      if (checkbox.checked) {
+        selectedDays.push(checkbox.value);
+      }
     });
-</script>
+  
+    // 時間選択のオプションを有効/無効にする
+    for (let i = 0; i < select.options.length; i++) {
+      const option = select.options[i];
+      const optionValue = option.value;
+      if (selectedDays.includes(optionValue)) {
+        option.disabled = false;
+      } else {
+        option.disabled = true;
+        option.selected = false;
+      }
+    }
+  }
+  
+  // チェックボックスの変更時に時間選択を更新
+  const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+  checkboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', updateSelectOptions);
+  });
+  
+  // 初期状態で時間選択を更新
+  updateSelectOptions();
+  </script> -->
+
+  <script>
+    // チェックボックスの変更時に選択された時間を表示
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    const timeSelect = document.getElementById('timeSelect');
+    
+    checkboxes.forEach(checkbox => {
+      checkbox.addEventListener('change', () => {
+        if (checkbox.checked) {
+          // チェックボックスが選択されたら、時間選択を表示
+          timeSelect.style.display = 'block';
+        } else {
+          // チェックボックスが選択解除されたら、時間選択を非表示
+          timeSelect.style.display = 'none';
+          // 選択された時間をリセット
+          timeSelect.selectedIndex = -1;
+        }
+      });
+    });
+    
+    // ページ読み込み時に初期状態を設定
+    timeSelect.style.display = 'none';
+    </script>
+
+
 
 
 
